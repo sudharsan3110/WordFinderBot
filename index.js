@@ -91,7 +91,7 @@ client.on("interactionCreate", async (interaction) => {
       results.slice(0, 10).forEach((msg) => {
         const msgLink = `https://discord.com/channels/${msg.guildId}/${msg.channelId}/${msg.id}`;
         messageId = msg.id;
-        reply += `📌 [Message Link](${msgLink}) — \`${msg.content}\`\n`;
+        reply += `[${msg.id}](${msgLink}) — \`${msg.content}\`\n`;
       });
 
       await interaction.reply(reply);
@@ -100,4 +100,3 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(process.env.BOT_TOKEN);
-
