@@ -24,7 +24,6 @@ function storeMessage(msg) {
     channelId: msg.channelId,
     guildId: msg.guildId,
   });
-  console.log(messageStore);
 }
 
 function searchMessages(word, limit) {
@@ -36,7 +35,7 @@ function searchMessages(word, limit) {
 }
 const commands = [
   new SlashCommandBuilder()
-    .setName("findmessage")
+    .setName("search")
     .setDescription("Find messages with a keyword and minimum length")
     .addStringOption((option) =>
       option.setName("word").setDescription("Search keyword").setRequired(true)
@@ -76,7 +75,7 @@ client.on("messageCreate", (message) => {
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  if (interaction.commandName === "findmessage") {
+  if (interaction.commandName === "search") {
     const word = interaction.options.getString("word");
     const limit = interaction.options.getInteger("limit");
 
@@ -91,6 +90,7 @@ client.on("interactionCreate", async (interaction) => {
 
       results.slice(0, 10).forEach((msg) => {
         const msgLink = `https://discord.com/channels/${msg.guildId}/${msg.channelId}/${msg.id}`;
+        messageId = msg.id;
         reply += `📌 [Message Link](${msgLink}) — \`${msg.content}\`\n`;
       });
 
@@ -100,3 +100,4 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.login(process.env.BOT_TOKEN);
+
