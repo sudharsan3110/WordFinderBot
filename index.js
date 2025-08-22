@@ -63,7 +63,7 @@ const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 })();
 
 client.once("ready", () => {
-  console.log(`🤖 Logged in as ${client.user.tag}`);
+  console.log(`Logged in as ${client.user.tag}`);
 });
 
 client.on("messageCreate", (message) => {
